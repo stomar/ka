@@ -1,0 +1,532 @@
+% \iffalse
+% =======================================================================
+% ka.dtx
+% Copyright (C) 2011 Marcus Stollsteimer.
+% 
+% Paket fuer Klassenarbeiten und Tests
+%
+% This program may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.2
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.2 or later is part of all distributions of LaTeX
+% version 1999/12/01 or later.
+%
+% This program consists of all files listed in README.
+% =======================================================================
+% \fi
+%
+% \CheckSum{320}
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+%\iffalse  The installer.
+%<*installer>
+\begin{filecontents}{ka.ins}
+\input docstrip
+\askforoverwritetrue
+\generate{
+  \file{ka.sty}{\from{ka.dtx}{package}}
+  \file{ka.cfg}{\from{ka.dtx}{configfile}}
+}
+
+\Msg{***********************************************************}
+\Msg{*}
+\Msg{* To finish the installation you have to move the file}
+\Msg{* ka.sty into a directory searched by TeX}
+\Msg{* (possibly the main directory of your document or a}
+\Msg{* local texmf-path).}
+\Msg{*}
+\Msg{* To produce the documentation execute the following}
+\Msg{* commands:}
+\Msg{*}
+\Msg{* \space\space latex ka.dtx}
+\Msg{* \space\space latex ka.dtx}
+\Msg{* \space\space makeindex -s gind.ist ka.idx}
+\Msg{* \space\space makeindex -s gglo.ist -o ka.gls ka.glo}
+\Msg{* \space\space latex ka.dtx}
+\Msg{*}
+\Msg{* The documentation can then be found in  ka.dvi.}
+\Msg{*}
+\Msg{* Happy TeXing.}
+\Msg{*}
+\Msg{***********************************************************}
+
+\endbatchfile
+\end{filecontents}
+%</installer>
+% \fi
+%
+% \iffalse  A driver for this file.
+%<*driver>
+\documentclass{ltxdoc}
+\DoNotIndex{\",\,,\\,\@ifstar}
+\DoNotIndex{\alph,\arabic,\addtocontents,\addtocounter,\addtolength}
+\DoNotIndex{\baselineskip,\begingroup,\endgroup,\bfseries}
+\DoNotIndex{\ClassError,\ClassInfo,\ClassWarning,\ClassWarningNoLine}
+\DoNotIndex{\csname,\endcsname,\DeclareOption,\def,\equal,\expandafter}
+\DoNotIndex{\fill,\finalhyphendemerits,\geometry,\global}
+\DoNotIndex{\hbox,\hrulefill,\hspace}
+\DoNotIndex{\if,\else,\fi,\ifhmode,\fi,\ifthenelse,\ifvoid,\fi}
+\DoNotIndex{\InputIfFileExists}
+\DoNotIndex{\immediate,\isodd,\itshape}
+\DoNotIndex{\jobname}
+\DoNotIndex{\ldots,\LoadClass,\makeatletter,\marginpar,\mbox}
+\DoNotIndex{\NeedsTeXFormat,\newcommand,\newcounter,\newif,\newlength}
+\DoNotIndex{\newline,\newsavebox,\newwrite,\noindent,\nopagebreak,\normalfont}
+\DoNotIndex{\openout,\pagebreak,\pagestyle,\par,\parbox,\parskip}
+\DoNotIndex{\PackageError,\PackageInfo,\PackageWarning,\PackageWarningNoLine}
+\DoNotIndex{\PassOptionsToClass}
+\DoNotIndex{\penalty,\ProcessOptions,\ProvidesClass,\ProvidesPackage}
+\DoNotIndex{\raggedright,\refstepcounter,\relax,\renewcommand,\RequirePackage}
+\DoNotIndex{\setbox,\setcounter,\setlength,\settowidth}
+\DoNotIndex{\textwidth,\the,\typeout,\usebox,\value,\vspace}
+\usepackage{ngerman}
+\usepackage{parskip}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{ka.dtx}
+\end{document}
+%</driver>
+%\fi
+%
+%\iffalse  A config file example.
+%<*configfile>
+
+%% Punkte kursiv
+\renewcommand*{\@punkteStyle}{\emph}
+
+%</configfile>
+%\fi
+%
+%
+% \changes{v1.0}{2010/02/15}{Erste Ausgabe}
+%
+% \MakeShortVerb{\|}
+%
+% \title{Paket f\"ur Klassenarbeiten und Tests}
+% \author{Marcus Stollsteimer\\\texttt{sto.mar@web.de}}
+% \date{2011/08/23}
+% \maketitle
+%
+%
+% \section{Einleitung}
+% 
+% Dieses Paket stellt einige Befehle f\"ur das Erstellen
+% von Klassenarbeiten und Tests bereit.
+%
+%
+% \section{Die Benutzerschnittstelle}
+%
+% \subsection{Neue Befehle des Pakets}
+%
+%\iffalse
+% \DescribeMacro{\makro}
+% Der Befehl |\makro{arg}| \ldots.
+%
+% \DescribeEnv{alphenum}
+% Die Umgebung |alphenum| \ldots.
+%\fi
+%
+% \subsection{Konfigurations-Datei}
+%
+% Das Paket liest die Konfigurations-Datei |ka.cfg| ein,
+% wenn diese im \TeX-Suchpfad vorhanden ist.
+% In dieser Datei k\"onnen benutzerspezifische Anpassungen
+% vorgenommen werden, oder Einstellungen, die f\"ur alle Dokumente
+% in einem bestimmten Verzeichnis gelten sollen.
+%
+% Die Datei k\"onnte zum Beispiel folgenden Inhalt haben:
+% \begin{quote}
+%    |\renewcommand*{\@AufgLabelStyle}{\underline}|
+% \end{quote}
+% Achtung: |\underline| als letzten Befehl!
+%
+% Auch sonstige Einstellungen aus der Praeambel k\"onnen in der
+% Konfigurations-Datei vorgenommen werden.
+%
+% \section{Inkompatibilit"aten}
+%
+% Seit Version~1.1 d"urfen im Argument der Befehle |\punkte| und
+% |\Punkte| nur noch Zahlen stehen (Achtung: Kommazahlen mit Dezimalpunkt!).
+%
+%
+% \section{Bekannte Probleme}
+%
+% Punkte, die in einer |minipage|-Umgebung mit dem |\punkte|-Befehl angegeben werden,
+% werden bei der Gesamtpunktzahl nicht ber\"ucksichtigt.
+%
+% \section{To do}
+%
+% Ersetze |\newcommand| durch |\newcommand*| wo angebracht.
+%
+% \vspace{2cm}
+%
+% \StopEventually{}
+%
+%
+% \section{Der Programmcode}
+%
+%    Zun\"achst wird das Paket und dessen aktuelle Version
+%    identifiziert.
+%    \begin{macrocode}
+%<*package>
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ka}[2011/08/23 v1.1 Paket fuer Klassenarbeiten]
+%    \end{macrocode}
+%
+%    |\@KALabel| wird auf den Standardwert |KA| gesetzt.
+%    Mit den Optionen |test| und |kurztest| kann der Wert entsprechend
+%    ge\"andert werden.
+%    \begin{macrocode}
+\newcommand*{\@KALabel}{KA}
+%    \end{macrocode}
+%
+% \begin{macro}{noversion}
+% \begin{macro}{noheader}
+% \begin{macro}{test}
+% \begin{macro}{kurztest}
+%    Hier werden die Schalter f\"ur die Optionen |noversion| und
+%    |noheader| gesetzt.
+%    \begin{macrocode}
+\newif\if@header\@headertrue
+\DeclareOption{noheader}{\@headerfalse}
+\newif\if@showversion\@showversiontrue
+\DeclareOption{noversion}{\@showversionfalse}
+\DeclareOption{test}{\renewcommand*{\@KALabel}{Test}}
+\DeclareOption{kurztest}{\renewcommand*{\@KALabel}{Kurztest}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+%    Ausf\"uhren der Optionen und Laden der ben\"otigten Pakete.
+%    \begin{macrocode}
+\ProcessOptions\relax
+\RequirePackage{ifthen}
+\RequirePackage{tabularx}
+\RequirePackage{fp}
+\RequirePackage{numprint}
+%    \end{macrocode}
+%
+%    Setzen von |\parindent| und |\parskip|
+%    (auch in der |minipage|-Umgebung).
+%    \begin{macrocode}
+\newlength{\@parskip}\setlength{\@parskip}{\parskip}
+\newcommand*{\@minipagerestore}{\setlength{\parskip}{\@parskip}}
+%    \end{macrocode}
+%
+%    Hier werden sp\"ater benutzte Textkonstanten definiert.
+%    \begin{macrocode}
+\newcommand*{\@NameLabel}{Name}
+\newcommand*{\@PunkteLabel}{Punkte}
+\newcommand*{\@MuendlichLabel}{m\"undliche Note}
+\newcommand*{\@NoteLabel}{Note}
+\newcommand*{\@LoesungenLabel}{L\"osungen}
+\newcommand*{\@punkttext}{Punkt}
+\newcommand*{\@punktetext}{Punkte}
+\newcommand*{\@AufgLabel}{Aufgabe}
+\newcommand*{\@HinweisLabel}{Hinweis}
+\newcommand*{\@wendentext}{Bitte wenden\ldots}
+%    \end{macrocode}
+%
+%    Hier werden einige interne Variablen definiert, die dann
+%    die Informationen f\"ur die Kopfzeile enthalten werden.
+%    \begin{macrocode}
+\newcommand{\@Fach}{}
+\newcommand{\@Klasse}{}
+\newcommand{\@ArbeitNr}{}
+\newcommand{\@Version}{}
+\newcommand{\@Lehrer}{}
+\newcommand{\@Datum}{}
+\newcommand{\@Gesamtpunkte}{}
+%    \end{macrocode}
+%
+% \begin{macro}{\Fach}
+% \begin{macro}{\Klasse}
+% \begin{macro}{\ArbeitNr}
+% \begin{macro}{\Lehrer}
+% \begin{macro}{\Datum}
+% \begin{macro}{\Punkte}
+%
+%    Dann werden die Befehle definiert, mit denen diesen Variablen
+%    Werte zugewiesen werden k\"onnen.
+%    Kommazahlen bei |\Punkte| m"ussen mit Dezimalpunkt geschrieben werden
+%    (die Ausgabe mit Dezimalkomma "ubernimmt das Paket |numprint|.)
+%    \begin{macrocode}
+\newcommand{\Fach}[1]{%
+   \renewcommand{\@Fach}{#1}}
+\newcommand{\Klasse}[1]{%
+   \renewcommand{\@Klasse}{#1}}
+\newcommand{\ArbeitNr}[1]{%
+   \renewcommand{\@ArbeitNr}{#1}}
+\newcommand{\Lehrer}[1]{%
+   \renewcommand{\@Lehrer}{#1}}
+\newcommand{\Datum}[1]{%
+   \renewcommand{\@Datum}{#1}}
+\newcommand{\Punkte}[1]{%
+   \renewcommand{\@Gesamtpunkte}{#1}}
+%    \end{macrocode}
+%    \end{macro}
+%    \end{macro}
+%    \end{macro}
+%    \end{macro}
+%    \end{macro}
+%    \end{macro}
+%
+%    Mit diesen Parametern wird dann die Kopfzeile definiert.
+%    Der Parameter |@Version| wird durch die |Arbeit|-Umgebung gesetzt.
+%    \begin{macrocode}
+\newcommand{\@KopfzeileStyle}{\bfseries}
+\newcommand{\@NotenzeileStyle}{\footnotesize\itshape}
+\newcommand{\@Kopfzeile}{%
+  {\@KopfzeileStyle{%
+  \@Fach\ \@Klasse\ \hspace*{\fill}%
+  \@KALabel~\@ArbeitNr \hspace*{\fill}%
+  \if@showversion
+    \ifthenelse{\equal{\@Version}{}}{}{\@Version \hspace*{\fill}}%
+  \fi
+  \@Lehrer \hspace{\fill} \mbox{\@Datum}}}
+\newcommand{\@Notenzeile}{%
+  {\@NotenzeileStyle{%
+  \begin{tabularx}{\linewidth}{|X|l|l|}
+  \hline
+  \rule[-8mm]{0pt}{35pt}%
+   \@NameLabel &
+   \@PunkteLabel\ (\numprint{\@Gesamtpunkte})\rule{8mm}{0pt} &
+   \@NoteLabel\rule{15mm}{0pt} \\
+  \mbox{}&&\\ \hline
+  \end{tabularx}}}}}
+%    \end{macrocode}
+%
+%    Die Z\"ahler, die die Aufgabennummer und Teilaufgabennummer enthalten,
+%    werden definiert. Die entsprechenden Befehle zur Ausgabe
+%    von Querverweisen (erzeugt mit |\label| und |\ref|) werden definiert:
+%    |\theaufgnr| und |\theteilnr|.
+%    \begin{macrocode}
+\newcounter{aufgnr}
+\newcounter{teilnr}
+\renewcommand{\theaufgnr}{\arabic{aufgnr}}
+\renewcommand{\theteilnr}{\alph{teilnr}}
+%    \end{macrocode}
+%
+% \changes{v1.1}{2011/01/23}{Berechnung der Gesamtpunktzahl}
+% \changes{v1.1}{2011/02/25}{Warnung bei falscher Gesamtpunktzahl}
+%
+%    Der Z\"ahler f\"ur die Gesamtpunktzahl wird definiert
+%    und auf Null gesetzt.
+%    \begin{macrocode}
+\FPset{\punktezahl}{0}
+%    \end{macrocode}
+%
+% \begin{macro}{\@singleVersion}
+% \begin{macro}{\@VersionA}
+% \begin{macro}{\@VersionB}
+% \begin{macro}{\AB}
+%
+%    Befehle zum Umschalten der Version. Diese setzen auch den Wert
+%    von |\@Version|.
+%    |AB| liefert ja nach Version das erste oder zweite Argument
+%    zur\"uck. Wenn keine Version definiert ist, wird das erste
+%    Argument ausgegeben.
+%    \begin{macrocode}
+\newcommand{\@singleVersion}{\renewcommand{\@Version}{}}
+\newcommand{\@VersionA}{\renewcommand{\@Version}{A}}
+\newcommand{\@VersionB}{\renewcommand{\@Version}{B}}
+\newcommand{\AB}[2]{%
+  \ifthenelse{\equal{\@Version}{}}{#1}{}%
+  \ifthenelse{\equal{\@Version}{A}}{#1}{}%
+  \ifthenelse{\equal{\@Version}{B}}{#2}{}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{environment}{Arbeit}
+%
+%    Die Umgebung |Arbeit|: die Kopfzeile wird ausgegeben,
+%    es sei denn, die Option |noheader| wurde gesetzt.
+%    Au\"sserdem werden die Z\"ahler f\"ur Aufgaben, Teilaufgaben
+%    und Gesamtunktzahl zur\"uckgesetzt (notwendig, wenn mehrere
+%    Arbeiten (z.\ B. verschiedene Versionen) in einem
+%    Dokument gesetzt werden).
+%    Optionales Argument: Version (B: Version B, sonst: A).
+%    (|\centering| bei Kopfzeile, um Overfull-hbox-Warnung bei
+%    parskip-Option zu vermeiden.)
+%
+%    Zum Schluss wird gepr"uft, ob die berechnete Gesamtpunktzahl
+%    und die angegebene Punktzahl "ubereinstimmen.
+%    Falls nicht, wird eine Warnung ausgegeben.
+%    \begin{macrocode}
+\newenvironment{Arbeit}[1][]{%
+  \ifthenelse{\equal{#1}{}}{\@singleVersion}{}%
+  \ifthenelse{\equal{#1}{A}}{\@VersionA}{}%
+  \ifthenelse{\equal{#1}{B}}{\@VersionB}{}%
+  \setAufgNr{1}%
+  \setTeilNr{1}%
+  \FPset{\punktezahl}{0}%
+  \if@header
+    {\centering%
+    \noindent\@Kopfzeile\\[\bigskipamount]
+    \@Notenzeile\par}%
+  \fi
+  }{%
+  \ifthenelse{\equal{\FPprint{\punktezahl}}{\@Gesamtpunkte}}%
+    {\typeout{}}%
+    {\PackageWarningNoLine{ka}{%
+       Gesamtpunktzahl stimmt nicht (\FPprint{\punktezahl}<>\@Gesamtpunkte)}}}
+%    \end{macrocode}
+% \end{environment}
+%
+%    Schalter, der angibt, ob L\"osungen ausgegeben werden.
+%    \begin{macrocode}
+\newif\if@loesung\@loesungfalse
+%    \end{macrocode}
+%
+% \begin{macro}{\loesung}
+%
+%    Inhalt wird nur in einer |Loesungen|-Umgebung ausgegeben.
+%    \begin{macrocode}
+\newcommand{\@LoesungenStyle}{\itshape}
+\newcommand{\loesung}[1]{%
+  \if@loesung
+    {\@LoesungenStyle%
+    #1}%
+  \else
+    \relax
+  \fi}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{environment}{Loesungen}
+%
+%    Die Umgebung |Loesungen|: der entsprechende Schalter wird
+%    gesetzt.
+%    Die Kopfzeile wird ausgegeben
+%    (ohne Namen und Note etc.), es sei denn, die Option |noheader|
+%    wurde gesetzt (???).
+%    Au\"sserdem werden die Z\"ahler f\"ur Aufgaben und
+%    Teilaufgaben zur\"uckgesetzt.
+%    Optionales Argument: Version (B: Version B, sonst: A).
+%    \begin{macrocode}
+\newenvironment{Loesungen}[1][]{%
+  \@loesungtrue
+  \ifthenelse{\equal{#1}{}}{\@singleVersion}{}%
+  \ifthenelse{\equal{#1}{A}}{\@VersionA}{}%
+  \ifthenelse{\equal{#1}{B}}{\@VersionB}{}%
+  \setAufgNr{1}%
+  \setTeilNr{1}%
+  \if@header
+    {\centering%
+    \noindent\@Kopfzeile\\%
+    {\@KopfzeileStyle\@LoesungenLabel}\hfill\medskip\hrule\par}%
+  \fi
+  }{}
+%    \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\setAufgNr}
+%
+%    Der Z\"ahler |aufgnr| kann mit |\setAufgNr{Wert}| gesetzt werden.
+%    (Da jeder |\Aufgabe|-Befehl zun\"achst den Z\"ahler um eins erh\"oht,
+%    wird |aufgnr| auf |Wert|-1 gesetzt.)
+%    \begin{macrocode}
+\newcommand{\setAufgNr}[1]{\setcounter{aufgnr}{#1}\addtocounter{aufgnr}{-1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Aufgabe}
+%
+%    |\Aufgabe| setzt zun\"achst die Aufgabennummer entsprechend dem Wert
+%    des optionalen Arguments, falls vorhanden.
+%    Der Z\"ahler f\"ur Teilaufgaben wird zur\"uck gesetzt und
+%    die Nummer der aktuellen Aufgabe weitergez\"ahlt.
+%    Ein Seitenumbruch direkt nach der Titelzeile wird verhindert.
+%    \begin{macrocode}
+\newcommand*{\@AufgLabelStyle}{\bfseries}
+\newcommand*{\@TeilLabelStyle}{}
+\newcommand*{\Aufgabe}[1][]{%
+  \ifthenelse{\equal{#1}{}}{}{\setAufgNr{#1}}%
+  \refstepcounter{aufgnr}%
+  \setcounter{teilnr}{0}%
+  {\noindent\@AufgLabelStyle{\@AufgLabel\ \theaufgnr}}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\setTeilNr}
+%
+%    Der Z\"ahler |teilnr| kann mit |\setTeilNr{Wert}| gesetzt werden.
+%    (Da jeder |\Teil|-Befehl zun\"achst den Z\"ahler um eins erh\"oht,
+%    wird |teilnr| auf |Wert|-1 gesetzt.)
+%    \begin{macrocode}
+\newcommand{\setTeilNr}[1]{\setcounter{teilnr}{#1}\addtocounter{teilnr}{-1}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\Teil}
+%
+%    Der Befehl |\Teil| erh\"oht den Z\"ahler f\"ur Teilaufgaben und druckt
+%    ein entsprechendes Label.
+%    \begin{macrocode}
+\newcommand{\Teil}{%
+  \refstepcounter{teilnr}%
+  {\noindent\@TeilLabelStyle{\theteilnr)}\ }}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\punkte}
+% \begin{macro}{\punkt}
+%
+%    Die Befehle zur Ausgabe der Punktzahl werden definiert.
+%    Ein Zeilenumbruch wird gegebenfalls vorgenommen (siehe TeXbook).
+%    Kommazahlen m"ussen mit Dezimalpunkt geschrieben werden
+%    (die Ausgabe mit Dezimalkomma "ubernimmt das Paket |numprint|.)
+%    \begin{macrocode}
+\newcommand*{\@punkteStyle}{}
+\newcommand{\punkte}[1]{%
+  \FPadd{\punktezahl}{\punktezahl}{#1}%
+  \FPclip{\punktezahl}{\punktezahl}%
+  %\hspace*{\fill}\penalty0\hspace{1em}\hspace*{\fill}%
+  %\finalhyphendemerits=0%
+  \quad
+  \ifthenelse{\equal{#1}{1}}{\@punkteStyle{\mbox{(1~\@punkttext)}}}%
+                            {\@punkteStyle{\mbox{(\numprint{#1}~\@punktetext)}}}}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+%    Zuletzt: lese Konfigurations-Datei, falls vorhanden.
+%    \begin{macrocode}
+\InputIfFileExists{ka.cfg}%
+  {\typeout{********************************^^J%
+            * Local config file ka.cfg used^^J%
+            ********************************}}%
+  {\PackageInfo{ka}{No local configuration file}}
+%</package>
+%    \end{macrocode}
+%
+%
+% \PrintIndex
+% \PrintChanges
+%
+% \Finale
+%
+\endinput

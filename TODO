@@ -1,0 +1,22 @@
+Fehlermeldung erzeugen, wenn Punkte mit Dezimalkomma eingegeben werden
+stoerende Fehlermeldung, wenn \punkte ohne Argument
+
+Option: Feld fuer muendliche Note
+
+Hinweis
+wenden
+\noindent ueberall?
+Fusszeile
+
+Doku
+
+
+Problem: Label bei pdflatex:
+---------------------------
+
+l.184 \Teil
+
+! pdfTeX warning (ext4): destination with the same identifier (name{teilnr.1})
+has been already used, duplicate ignored
+<to be read again>
+                   \penalty

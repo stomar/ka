@@ -1,0 +1,15 @@
+# generic files to ignore
+# backup files (*~) and vim swap file (.swp)
+*~
+*.lock
+*.swp
+
+#ignore generated files
+*.dvi
+*.aux
+*.log
+*.idx
+*.glo
+
+#except this file
+!.gitignore

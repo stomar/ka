@@ -1,0 +1,20 @@
+Installation:
+
+1. Type `make all' to compile the package and the documentation.
+
+2. Make sure the file `ka.sty' is located
+   in your search path.
+
+3. Type `make clean' to remove temporary files.
+
+
+
+The package `ka' consists of the following files:
+
+   ChangeLog
+   Makefile
+   INSTALL
+   README
+   ka.dtx
+   example.tex
+   mkinstalldirs

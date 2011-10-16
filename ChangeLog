@@ -1,0 +1,15 @@
+2011-08-23  Marcus Stollsteimer  <sto.mar@web.de>
+
+	* ka.dtx: small corrections
+
+2011-02-25  Marcus Stollsteimer  <sto.mar@web.de>
+
+	* ka.dtx: Warning at mismatch of total points
+
+2011-01-23  Marcus Stollsteimer  <sto.mar@web.de>
+
+	* ka.dtx: calculation of total points
+
+2010-02-15  Marcus Stollsteimer  <sto.mar@web.de>
+
+	* ka.dtx, example.tex, Makefile, README, INSTALL: new
