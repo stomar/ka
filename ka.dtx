@@ -1,7 +1,7 @@
 % \iffalse
 % =======================================================================
 % ka.dtx
-% Copyright (C) 2011 Marcus Stollsteimer.
+% Copyright (C) 2010-2012 Marcus Stollsteimer.
 % 
 % Paket fuer Klassenarbeiten und Tests
 %
@@ -17,7 +17,7 @@
 % =======================================================================
 % \fi
 %
-% \CheckSum{331}
+% \CheckSum{335}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -117,12 +117,13 @@
 %
 %
 % \changes{v1.0}{2010/02/15}{Erste Ausgabe}
+% \changes{v1.2}{2012/01/07}{Gesamtpunktzahl als globaler Z"ahler}
 %
 % \MakeShortVerb{\|}
 %
 % \title{Paket f\"ur Klassenarbeiten und Tests}
 % \author{Marcus Stollsteimer\\\texttt{sto.mar@web.de}}
-% \date{2011/08/23}
+% \date{2012/01/07}
 % \maketitle
 %
 %
@@ -169,9 +170,6 @@
 %
 % \section{Bekannte Probleme}
 %
-% Punkte, die in einer |minipage|-Umgebung mit dem |\punkte|-Befehl angegeben werden,
-% werden bei der Gesamtpunktzahl nicht ber\"ucksichtigt.
-%
 % \section{To do}
 %
 % Ersetze |\newcommand| durch |\newcommand*| wo angebracht.
@@ -188,7 +186,7 @@
 %    \begin{macrocode}
 %<*package>
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ka}[2011/08/23 v1.1 Paket fuer Klassenarbeiten]
+\ProvidesPackage{ka}[2012/01/07 v1.2 Paket fuer Klassenarbeiten]
 %    \end{macrocode}
 %
 %    |\@KALabel| wird auf den Standardwert |KA| gesetzt.
@@ -334,7 +332,7 @@
 %    Der Z\"ahler f\"ur die Gesamtpunktzahl wird definiert
 %    und auf Null gesetzt.
 %    \begin{macrocode}
-\FPset{\punktezahl}{0}
+\newcommand{\punktezahl}{0}
 %    \end{macrocode}
 %
 % \begin{macro}{\@singleVersion}
@@ -383,7 +381,7 @@
   \ifthenelse{\equal{#1}{B}}{\@VersionB}{}%
   \setAufgNr{1}%
   \setTeilNr{1}%
-  \FPset{\punktezahl}{0}%
+  \renewcommand{\punktezahl}{0}%
   \if@header
     {\centering%
     \noindent\@Kopfzeile\\[\bigskipamount]
@@ -500,11 +498,14 @@
 %    Ein Zeilenumbruch wird gegebenfalls vorgenommen (siehe TeXbook).
 %    Kommazahlen m"ussen mit Dezimalpunkt geschrieben werden
 %    (die Ausgabe mit Dezimalkomma "ubernimmt das Paket |numprint|.)
+%    Damit Punkte in |minipage|-Umgebungen ebenfalls ber"ucksichtigt
+%    werden, muss die Gesamtpunktzahl global ge"andert werden.
 %    \begin{macrocode}
 \newcommand*{\@punkteStyle}{}
 \newcommand{\punkte}[1]{%
-  \FPadd{\punktezahl}{\punktezahl}{#1}%
-  \FPclip{\punktezahl}{\punktezahl}%
+  \FPadd{\tempval}{\punktezahl}{#1}%
+  \FPclip{\tempval}{\tempval}%
+  \global\let\punktezahl\tempval%
   %\hspace*{\fill}\penalty0\hspace{1em}\hspace*{\fill}%
   %\finalhyphendemerits=0%
   \quad

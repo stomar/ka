@@ -1,3 +1,8 @@
+2012-01-07  Marcus Stollsteimer  <sto.mar@web.de>
+
+	* ka.dtx: bug fixed: total points set globally,
+	now \punkte works also in minipages
+
 2011-10-24  Marcus Stollsteimer  <sto.marr@web.de>
 
 	* ka.dtx: \wenden
