@@ -3,7 +3,7 @@
 	* ka.dtx: bug fixed: total points set globally,
 	now \punkte works also in minipages
 
-2011-10-24  Marcus Stollsteimer  <sto.marr@web.de>
+2011-10-24  Marcus Stollsteimer  <sto.mar@web.de>
 
 	* ka.dtx: \wenden
 
@@ -13,7 +13,7 @@
 
 2011-02-25  Marcus Stollsteimer  <sto.mar@web.de>
 
-	* ka.dtx: Warning at mismatch of total points
+	* ka.dtx: warning at mismatch of total points
 
 2011-01-23  Marcus Stollsteimer  <sto.mar@web.de>
 
