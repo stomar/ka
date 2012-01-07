@@ -1,9 +1,34 @@
-`ka`: LaTeX package for exams
+`ka': LaTeX package for exams
 =============================
 
-(C\) Marcus Stollsteimer, 2011
+Copyright (C) 2010-2012, Marcus Stollsteimer
 
 This package provides several features useful for making exams.
+
+The package `ka' consists of the following files:
+
+  ChangeLog
+  INSTALL
+  Makefile
+  README
+  ka.dtx
+  example.tex
+  mkinstalldirs
+
+Installation:
+
+1. Type `latex ka.ins' to produce the file `ka.sty'.
+
+2. Make sure the file `ka.sty' is located in your TeX search path.
+
+Installation using `GNU make':
+
+1. Type `make' to produce the file `ka.sty'
+   (type `make all' to also produce the documentation).
+
+2. Type `make install' to install to `/usr/local/share/texmf'.
+
+3. Type `make clean' to remove temporary files.
 
 * * * * *
 
@@ -11,3 +36,28 @@ LaTeX-Paket fuer Klassenarbeiten und Tests
 
 Dieses Paket stellt einige Befehle fuer das Erstellen
 von Klassenarbeiten und Tests bereit.
+
+Das Paket `ka' besteht aus folgenden Dateien:
+
+  ChangeLog
+  INSTALL
+  Makefile
+  README
+  ka.dtx
+  example.tex
+  mkinstalldirs
+
+Installation:
+
+1. Rufen Sie `latex ka.ins' auf, um die Datei `ka.sty' zu generieren.
+
+2. Verschieben oder kopieren Sie die Datei `ka.sty' in Ihren TeX-Suchpfad.
+
+Installation mithilfe von `GNU make':
+
+1. Rufen Sie `make' auf, um die Datei `ka.sty' zu generieren
+   (mit `make all' wird die Dokumentation ebenfalls erzeugt).
+
+2. Mit `make install' wird das Paket nach `/usr/local/share/texmf' installiert.
+
+3. Rufen Sie `make clean' auf, um temporaere Dateien zu entfernen.
