@@ -1,3 +1,8 @@
+2012-01-14  Marcus Stollsteimer  <sto.mar@web.de>
+
+	* ka.dtx: new option (AB) for Arbeit and Loesungen environment to
+	output both version arguments of the \AB macro (in different colors)
+
 2012-01-07  Marcus Stollsteimer  <sto.mar@web.de>
 
 	* ka.dtx: bug fixed: total points set globally,

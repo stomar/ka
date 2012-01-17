@@ -17,7 +17,7 @@
 % =======================================================================
 % \fi
 %
-% \CheckSum{335}
+% \CheckSum{351}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -118,12 +118,13 @@
 %
 % \changes{v1.0}{2010/02/15}{Erste Ausgabe}
 % \changes{v1.2}{2012/01/07}{Gesamtpunktzahl als globaler Z"ahler}
+% \changes{v1.2}{2012/01/14}{neuer Versionsparameter (AB)}
 %
 % \MakeShortVerb{\|}
 %
 % \title{Paket f\"ur Klassenarbeiten und Tests}
 % \author{Marcus Stollsteimer\\\texttt{sto.mar@web.de}}
-% \date{2012/01/07}
+% \date{2012/01/14}
 % \maketitle
 %
 %
@@ -186,7 +187,7 @@
 %    \begin{macrocode}
 %<*package>
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ka}[2012/01/07 v1.2 Paket fuer Klassenarbeiten]
+\ProvidesPackage{ka}[2012/01/14 v1.2 Paket fuer Klassenarbeiten]
 %    \end{macrocode}
 %
 %    |\@KALabel| wird auf den Standardwert |KA| gesetzt.
@@ -223,6 +224,7 @@
 \RequirePackage{fp}
 \RequirePackage{numprint}
 \RequirePackage{color}
+\definecolor{darkgreen}{RGB}{34,165,34} % #22A522
 %    \end{macrocode}
 %
 %    Setzen von |\parindent| und |\parskip|
@@ -338,22 +340,27 @@
 % \begin{macro}{\@singleVersion}
 % \begin{macro}{\@VersionA}
 % \begin{macro}{\@VersionB}
+% \begin{macro}{\@VersionAB}
 % \begin{macro}{\AB}
 %
 %    Befehle zum Umschalten der Version. Diese setzen auch den Wert
 %    von |\@Version|.
-%    |AB| liefert ja nach Version das erste oder zweite Argument
+%    |AB| liefert ja nach Version das erste (|A|), zweite (|B|) oder
+%    beide Argumente (|AB|, farblich unterschiedlich)
 %    zur\"uck. Wenn keine Version definiert ist, wird das erste
 %    Argument ausgegeben.
 %    \begin{macrocode}
 \newcommand{\@singleVersion}{\renewcommand{\@Version}{}}
 \newcommand{\@VersionA}{\renewcommand{\@Version}{A}}
 \newcommand{\@VersionB}{\renewcommand{\@Version}{B}}
+\newcommand{\@VersionAB}{\renewcommand{\@Version}{AB}}
 \newcommand{\AB}[2]{%
   \ifthenelse{\equal{\@Version}{}}{#1}{}%
   \ifthenelse{\equal{\@Version}{A}}{#1}{}%
-  \ifthenelse{\equal{\@Version}{B}}{#2}{}}
+  \ifthenelse{\equal{\@Version}{B}}{#2}{}%
+  \ifthenelse{\equal{\@Version}{AB}}{{\color{blue}#1} [{\color{darkgreen}#2}]}{}}%
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -367,7 +374,8 @@
 %    und Gesamtunktzahl zur\"uckgesetzt (notwendig, wenn mehrere
 %    Arbeiten (z.\ B. verschiedene Versionen) in einem
 %    Dokument gesetzt werden).
-%    Optionales Argument: Version (B: Version B, sonst: A).
+%    Optionales Argument: Version
+%    (|A|: Version~A (Voreinstellung), |B|: Version~B, |AB|: Version~AB).
 %    (|\centering| bei Kopfzeile, um Overfull-hbox-Warnung bei
 %    parskip-Option zu vermeiden.)
 %
@@ -379,6 +387,7 @@
   \ifthenelse{\equal{#1}{}}{\@singleVersion}{}%
   \ifthenelse{\equal{#1}{A}}{\@VersionA}{}%
   \ifthenelse{\equal{#1}{B}}{\@VersionB}{}%
+  \ifthenelse{\equal{#1}{AB}}{\@VersionAB}{}%
   \setAufgNr{1}%
   \setTeilNr{1}%
   \renewcommand{\punktezahl}{0}%
@@ -424,13 +433,15 @@
 %    wurde gesetzt (???).
 %    Au\"sserdem werden die Z\"ahler f\"ur Aufgaben und
 %    Teilaufgaben zur\"uckgesetzt.
-%    Optionales Argument: Version (B: Version B, sonst: A).
+%    Optionales Argument: Version
+%    (|A|: Version~A (Voreinstellung), |B|: Version~B, |AB|: Version~AB).
 %    \begin{macrocode}
 \newenvironment{Loesungen}[1][]{%
   \@loesungtrue
   \ifthenelse{\equal{#1}{}}{\@singleVersion}{}%
   \ifthenelse{\equal{#1}{A}}{\@VersionA}{}%
   \ifthenelse{\equal{#1}{B}}{\@VersionB}{}%
+  \ifthenelse{\equal{#1}{AB}}{\@VersionAB}{}%
   \setAufgNr{1}%
   \setTeilNr{1}%
   \if@header
