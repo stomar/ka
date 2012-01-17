@@ -1,3 +1,7 @@
+2012-01-17  Marcus Stollsteimer  <sto.mar@web.de>
+
+	* ka.dtx: \wenden ignored in Loesungen environment
+
 2012-01-14  Marcus Stollsteimer  <sto.mar@web.de>
 
 	* ka.dtx: new option (AB) for Arbeit and Loesungen environment to
