@@ -9,10 +9,12 @@
 \Datum{DATUM}
 \Punkte{4.5}
 
-% diese evtl. in ka.cfg
+% eventuell in `ka.cfg':
 \Fach{FACH}
 \Klasse{KLASSE}
 \Lehrer{LEHRER}
+
+\pagestyle{empty}
 
 \newcommand{\Inhalt}{%
 
@@ -22,25 +24,23 @@
 
 Text Version~\AB{A}{B}.
 
-\loesung{%
-Dies ist die L\"osung f\"ur Version~\AB{A}{B}.
+  \loesung{%
+  Dies ist die L\"osung f\"ur Version~\AB{A}{B}.
 
-Ein zweiter Absatz der \bfseries L\"osungen.
-}
+  Ein zweiter Absatz der L\"osungen.
+  }
 
 
 \bigskip
 \Aufgabe[4]\punkte{3.5}
 
-\setTeilNr{4}
-
 \Teil siehe unten in Teil~\ref{TeilC}.
 
-\loesung{42}
+  \loesung{42}
 
 \Teil Text (siehe Aufgabe~\ref{AufgabeA})
 
-\loesung{ebenfalls 42}
+  \loesung{ebenfalls 42}
 
 \Teil\label{TeilC} Text
 }
@@ -60,13 +60,7 @@ Ein zweiter Absatz der \bfseries L\"osungen.
 
 \newpage
 
-\begin{Loesungen}[A]
-\Inhalt
-\end{Loesungen}
-
-\vspace{5\baselineskip}
-
-\begin{Loesungen}[B]
+\begin{Loesungen}[AB]
 \Inhalt
 \end{Loesungen}
 
