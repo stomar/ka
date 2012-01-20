@@ -1,18 +1,12 @@
+Dokumentation
 Fehlermeldung erzeugen, wenn Punkte mit Dezimalkomma eingegeben werden
-stoerende Fehlermeldung, wenn \punkte ohne Argument
+stoerende Fehlermeldung entfernen, wenn \punkte ohne Argument verwendet wird
+\noindent ueberall verwendet?
 
-Option: Feld fuer muendliche Note
+* * * * *
 
-Hinweis
-wenden
-\noindent ueberall?
-Fusszeile
-
-Doku
-
-
-Problem: Label bei pdflatex:
----------------------------
+Problem: Label bei pdflatex und hyperref-Paket
+----------------------------------------------
 
 l.184 \Teil
 
