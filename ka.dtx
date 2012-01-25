@@ -17,7 +17,7 @@
 % =======================================================================
 % \fi
 %
-% \CheckSum{355}
+% \CheckSum{372}
 % \CharacterTable
 %  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -124,7 +124,7 @@
 %
 % \title{Paket f\"ur Klassenarbeiten und Tests}
 % \author{Marcus Stollsteimer\\\texttt{sto.mar@web.de}}
-% \date{2012/01/17}
+% \date{2012/01/24}
 % \maketitle
 %
 %
@@ -187,7 +187,7 @@
 %    \begin{macrocode}
 %<*package>
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ka}[2012/01/17 v1.2 Paket fuer Klassenarbeiten]
+\ProvidesPackage{ka}[2012/01/24 v1.2 Paket fuer Klassenarbeiten]
 %    \end{macrocode}
 %
 %    |\@KALabel| wird auf den Standardwert |KA| gesetzt.
@@ -503,6 +503,9 @@
 % \end{macro}
 %
 % \begin{macro}{\punkte}
+%
+% \changes{v1.2}{2012/01/24}{Bessere Behandlung von fehlender Punktzahl}
+%
 % \begin{macro}{\punkt}
 %
 %    Die Befehle zur Ausgabe der Punktzahl werden definiert.
@@ -511,17 +514,27 @@
 %    (die Ausgabe mit Dezimalkomma "ubernimmt das Paket |numprint|.)
 %    Damit Punkte in |minipage|-Umgebungen ebenfalls ber"ucksichtigt
 %    werden, muss die Gesamtpunktzahl global ge"andert werden.
+%    Wird die Punktzahl nicht angegeben, so wird eine Fehlermeldung
+%    ausgegeben und der Wert 0 verwendet.
 %    \begin{macrocode}
 \newcommand*{\@punkteStyle}{}
+\newcommand{\punktearg}{}
 \newcommand{\punkte}[1]{%
-  \FPadd{\tempval}{\punktezahl}{#1}%
+  \renewcommand{\punktearg}{#1}%
+  \ifthenelse{\equal{\punktearg}{}}{%
+    \PackageError{ka}{%
+      Missing number in `\protect\punkte', treated as zero%
+      }{%
+      You need to specify a number when using the `\protect\punkte{}' macro.}%
+    \renewcommand{\punktearg}{0}}{}%
+  \FPadd{\tempval}{\punktezahl}{\punktearg}%
   \FPclip{\tempval}{\tempval}%
   \global\let\punktezahl\tempval%
   %\hspace*{\fill}\penalty0\hspace{1em}\hspace*{\fill}%
   %\finalhyphendemerits=0%
   \quad
-  \ifthenelse{\equal{#1}{1}}{\@punkteStyle{\mbox{(1~\@punkttext)}}}%
-                            {\@punkteStyle{\mbox{(\numprint{#1}~\@punktetext)}}}}
+  \ifthenelse{\equal{\punktearg}{1}}{\@punkteStyle{\mbox{(1~\@punkttext)}}}%
+                                    {\@punkteStyle{\mbox{(\numprint{\punktearg}~\@punktetext)}}}}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
