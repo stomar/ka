@@ -20,12 +20,14 @@ texdir = $(prefix)/tex/latex
 #### End of system configuration section. ####
 
 SRCS = ka.dtx
-AUX  = ka.ins ka.pdf example.tex Makefile ChangeLog README mkinstalldirs
-DOCS = ka.cfg ka.dvi ka.ps example.dvi
+AUX  = ka.ins ka.pdf example.tex example.pdf Makefile ChangeLog README mkinstalldirs
+DOCS = ka.cfg
 LOGS  = ka.aux ka.log \
         ka.glo ka.gls \
         ka.idx ka.ilg ka.ind \
-        example.aux example.log
+        ka.dvi ka.ps \
+        example.aux example.log \
+        example.dvi example.ps
 
 
 ka.sty : ka.dtx ka.ins
@@ -48,12 +50,13 @@ ka.pdf : ka.dtx
 	latex ka.dtx
 	dvips -Ppdf ka.dvi
 	ps2pdf -sPAPERSIZE=a4 ka.ps
-	dvips ka.dvi
 
 .PHONY : test
 test : example.tex ka.sty
 	latex example.tex
 	latex example.tex
+	dvips -Ppdf example.dvi
+	ps2pdf -sPAPERSIZE=a4 example.ps
 
 .PHONY : all
 all : sty doc test
