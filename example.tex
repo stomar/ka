@@ -7,7 +7,7 @@
 
 \ArbeitNr{1}
 \Datum{DATUM}
-\Punkte{4.5}
+\Punkte{5.5}
 
 % eventuell in `ka.cfg':
 \Fach{FACH}
@@ -19,10 +19,10 @@
 \newcommand{\Inhalt}{%
 
 \bigskip
-\Aufgabe\punkte{1}
+\Aufgabe\punkte{2}
 \label{AufgabeA}
 
-Text Version~\AB{A}{B}.
+Aufgabentext Version~\AB{A}{B}
 
   \loesung{%
   Dies ist die L\"osung f\"ur Version~\AB{A}{B}.
@@ -34,7 +34,7 @@ Text Version~\AB{A}{B}.
 \bigskip
 \Aufgabe[4]\punkte{3.5}
 
-\Teil siehe unten in Teil~\ref{TeilC}.
+\Teil\label{TeilA} Aufgabentext
 
   \loesung{42}
 
@@ -42,7 +42,7 @@ Text Version~\AB{A}{B}.
 
   \loesung{ebenfalls 42}
 
-\Teil\label{TeilC} Text
+\Teil Text (siehe Teil~\ref{TeilA})
 }
 
 
