@@ -1,5 +1,5 @@
 #!/bin/sh
-# Make directory hierarchy. 
+# Make directory hierarchy.
 # Written by Noah Friedman <friedman@prep.ai.mit.edu>
 # Public domain.
 
@@ -7,7 +7,7 @@ defaultIFS='
 '
 IFS="${IFS-${defaultIFS}}"
 
-for file in ${1+"$@"} ; do 
+for file in ${1+"$@"} ; do
    oIFS="${IFS}"
    # Some sh's can't handle IFS=/ for some reason.
    IFS='%'
