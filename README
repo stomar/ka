@@ -8,7 +8,6 @@ This package provides several features useful for making exams.
 The package `ka' consists of the following files:
 
   ChangeLog
-  INSTALL
   Makefile
   README
   ka.dtx
@@ -40,7 +39,6 @@ von Klassenarbeiten und Tests bereit.
 Das Paket `ka' besteht aus folgenden Dateien:
 
   ChangeLog
-  INSTALL
   Makefile
   README
   ka.dtx
